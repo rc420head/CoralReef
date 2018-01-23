@@ -464,4 +464,10 @@
     <string name="media_art_title">Media cover art</string>
     <string name="media_art_summary">Enable media cover art on the lockscreen</string>
 
+    <!-- Screen Off animation --> 
+    <string name="screen_off_animation_title">Screen off animation</string> 
+    <string name="screen_off_animation_fade">Simple fade</string> 
+    <string name="screen_off_animation_color">Color fade</string> 
+    <string name="screen_off_animation_crt">CRT</string> 
+    <string name="screen_off_animation_scale">Scale</string> 
 </resources>
