@@ -472,4 +472,8 @@
     <string name="screen_off_animation_color">Color fade</string> 
     <string name="screen_off_animation_crt">CRT</string> 
     <string name="screen_off_animation_scale">Scale</string> 
+
+    <!-- In-call vibration optoins -->
+    <string name="incall_notifications_vibrate">Vibrate for Notifications</string>
+
 </resources>
