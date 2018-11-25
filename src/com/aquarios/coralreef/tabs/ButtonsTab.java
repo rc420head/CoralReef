@@ -37,11 +37,9 @@ import com.android.internal.logging.nano.MetricsProto;
 public class ButtonsTab extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener {
 
     private static final String POWERMENU_CATEGORY = "powermenu_category";
-    private static final String NAVIGATION_CATEGORY = "navigation_category";
     private static final String VOLUME_ROCKER_CATEGORY = "volume_rocker_category";
 
     private LayoutPreference mPowerMenu;
-    private LayoutPreference mNavigation;
     private LayoutPreference mVolumeRocker;
 
     @Override
@@ -51,9 +49,6 @@ public class ButtonsTab extends SettingsPreferenceFragment implements Preference
 
         mPowerMenu = (LayoutPreference) findPreference(POWERMENU_CATEGORY);
         mPowerMenu.setTitle(R.string.powermenu_title);
-
-        mNavigation = (LayoutPreference) findPreference(NAVIGATION_CATEGORY);
-        mNavigation.setTitle(R.string.navigationbar_title);
 
         mVolumeRocker = (LayoutPreference) findPreference(VOLUME_ROCKER_CATEGORY);
         mVolumeRocker.setTitle(R.string.volume_rocker_title);
