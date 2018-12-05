@@ -25,10 +25,23 @@
         android:layout="@layout/tab_header_preference_category"
         android:title="@string/lockscreen_aisle_header" />
 
-    <!--<PreferenceCategory
+    <PreferenceCategory
         android:key="media_options_category"
         android:title="@string/media_options_category_title" >
-    </PreferenceCategory>-->
+
+         <!-- Ambient play -->
+        <PreferenceScreen
+            android:key="ambient_play"
+            android:title="@string/ambient_play_title"
+            android:summary="@string/ambient_play_summary"
+            android:fragment="com.android.settings.AmbientPlaySettings" />
+
+        <SwitchPreference
+                android:key="lockscreen_visualizer"
+                android:title="@string/lockscreen_visualizer_title"
+                android:summary="@string/lockscreen_visualizer_summary" />
+
+    </PreferenceCategory>
 
     <!--<PreferenceCategory
         android:key="sleep_controls_category"
@@ -69,11 +82,6 @@
             android:key="double_tap_sleep_anywhere"
             android:title="@string/double_tap_sleep_lockscreen"
             android:defaultValue="true" />
-
-        <SwitchPreference
-                android:key="lockscreen_visualizer"
-                android:title="@string/lockscreen_visualizer_title"
-                android:summary="@string/lockscreen_visualizer_summary" />
 
     </PreferenceCategory>
 
