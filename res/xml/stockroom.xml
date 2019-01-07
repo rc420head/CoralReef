@@ -34,7 +34,6 @@
             android:fragment="org.candy.candyshop.fragments.GestureAnywhereSettings"
             android:title="@string/gesture_anywhere_title"
             android:summary="@string/gesture_anywhere_summary" />
-
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -65,6 +64,11 @@
     <PreferenceCategory
         android:key="miscellaneous_category"
         android:title="@string/miscellaneous_category_title" >
+
+        <Preference
+            android:key="candy_animations"
+            android:title="@string/animations_title"
+            android:fragment="org.candy.candyshop.fragments.Animations" />
 
         <SwitchPreference
             android:key="show_cpu_info"
