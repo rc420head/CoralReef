@@ -15,7 +15,7 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/audio_display_options_title" >
 
-    <preferenceCategory
+    <PreferenceCategory
         android:title="@string/animations_options_category_title">
         <ListPreference 
             android:key="screen_off_animation" 
@@ -23,6 +23,27 @@
             android:entries="@array/screen_off_animation_entries" 
             android:entryValues="@array/screen_off_animation_values"
             android:defaultValue="0" /> 
+
+         <PreferenceScreen
+            android:key="system_animation"
+            android:title="@string/system_animation_title"
+            android:summary="@string/system_animation_summary"
+            android:fragment="com.aquarios.coralreef.fragments.AnimationControls" />
+
+         <PreferenceScreen
+            android:key="tile_animation"
+            android:title="@string/tile_animation_title"
+            android:summary="@string/tile_animation_summary"
+            android:fragment="com.aquarios.coralreef.fragments.TileAnimations" />
+
+         <ListPreference
+            android:key="toast_animation"
+            android:title="@string/toast_animation_title"
+            android:entries="@array/toast_animation_entries"
+            android:entryValues="@array/toast_animation_values"
+            android:persistent="false" />
+
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:title="@string/audio_options_category">

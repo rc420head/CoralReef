@@ -17,6 +17,8 @@
 package com.aquarios.coralreef.fragments;
 
 import android.os.Bundle;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
@@ -26,6 +28,7 @@ import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v14.preference.SwitchPreference;
 import android.text.TextUtils;
 import android.provider.Settings;
+import android.widget.Toast;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -35,7 +38,7 @@ import com.android.internal.logging.nano.MetricsProto;
 
 import com.aquarios.coralreef.preferences.AppMultiSelectListPreference;
 import com.aquarios.coralreef.preferences.ScrollAppsViewPreference;
-
+import com.android.internal.util.aquarios.AwesomeAnimationHelper;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -49,15 +52,22 @@ public class AudioDisplayOptions extends SettingsPreferenceFragment implements P
     private static final String KEY_ASPECT_RATIO_CATEGORY = "aspect_ratio_category";
     private static final String KEY_ASPECT_RATIO_APPS_LIST_SCROLLER = "aspect_ratio_apps_list_scroller";
     private static final String SCREEN_OFF_ANIMATION = "screen_off_animation"; 
+    private static final String KEY_TOAST_ANIMATION = "toast_animation";
 
     private AppMultiSelectListPreference mAspectRatioAppsSelect;
     private ScrollAppsViewPreference mAspectRatioApps;
     private ListPreference mScreenOffAnimation;
+    private ListPreference mToastAnimation;
 
+    protected Context mContext;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.audio_display_options);
+
+        mContext = getActivity().getApplicationContext();
+        final ContentResolver resolver = getActivity().getContentResolver();
+        final PreferenceScreen prefScreen = getPreferenceScreen();
 
         final PreferenceCategory aspectRatioCategory =
                 (PreferenceCategory) getPreferenceScreen().findPreference(KEY_ASPECT_RATIO_CATEGORY);
@@ -91,6 +101,14 @@ public class AudioDisplayOptions extends SettingsPreferenceFragment implements P
         mScreenOffAnimation.setValue(String.valueOf(screenOffStyle)); 
         mScreenOffAnimation.setSummary(mScreenOffAnimation.getEntry()); 
         mScreenOffAnimation.setOnPreferenceChangeListener(this); 
+
+        // Toast animations
+        mToastAnimation = (ListPreference) findPreference(KEY_TOAST_ANIMATION);
+        mToastAnimation.setSummary(mToastAnimation.getEntry());
+        int CurrentToastAnimation = Settings.System.getInt(getContentResolver(), Settings.System.TOAST_ANIMATION, 1);
+        mToastAnimation.setValueIndex(CurrentToastAnimation); //set to index of default value
+        mToastAnimation.setSummary(mToastAnimation.getEntries()[CurrentToastAnimation]);
+        mToastAnimation.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -107,14 +125,19 @@ public class AudioDisplayOptions extends SettingsPreferenceFragment implements P
                 Settings.System.putString(getContentResolver(), Settings.System.ASPECT_RATIO_APPS_LIST, "");
             }
             return true;
-        }
-      if (preference == mScreenOffAnimation) { 
+        } else if (preference == mScreenOffAnimation) { 
             Settings.Global.putInt(getContentResolver(), 
                     Settings.Global.SCREEN_OFF_ANIMATION, Integer.valueOf((String) newValue)); 
             int valueIndex = mScreenOffAnimation.findIndexOfValue((String) newValue); 
             mScreenOffAnimation.setSummary(mScreenOffAnimation.getEntries()[valueIndex]); 
             return true; 
-        } 
+        } else if (preference == mToastAnimation) {
+            int index = mToastAnimation.findIndexOfValue((String) newValue);
+            Settings.System.putString(getContentResolver(), Settings.System.TOAST_ANIMATION, (String) newValue);
+            mToastAnimation.setSummary(mToastAnimation.getEntries()[index]);
+            Toast.makeText(mContext, "Toast Test", Toast.LENGTH_SHORT).show();
+            return true;
+        }
         return false;
     }
 
