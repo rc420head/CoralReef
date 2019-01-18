@@ -31,12 +31,14 @@ import com.android.settings.Utils;
 
 import com.android.internal.logging.nano.MetricsProto;
 
-public class DisplayOptions extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener {
+public class AudioPanel extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.display_options);
+        addPreferencesFromResource(R.xml.audio_panel);
+
+        mFooterPreferenceMixin.createFooterPreference().setTitle(R.string.volume_panel_info_text);
     }
 
     @Override
