@@ -59,13 +59,13 @@ public class BatteryOptions extends SettingsPreferenceFragment implements
         mStatusBarBatteryShowPercent =
                 (ListPreference) findPreference(SHOW_BATTERY_PERCENT);
         int batteryShowPercent = Settings.System.getIntForUser(resolver,
-                Settings.System.SHOW_BATTERY_PERCENT, 2, UserHandle.USER_CURRENT);
+                Settings.System.SHOW_BATTERY_PERCENT, 0, UserHandle.USER_CURRENT);
         mStatusBarBatteryShowPercent.setValue(Integer.toString(batteryShowPercent));
         mStatusBarBatteryShowPercent.setOnPreferenceChangeListener(this);
 
         mStatusBarBattery = (ListPreference) findPreference(STATUS_BAR_BATTERY_STYLE);
         int batteryStyle = Settings.Secure.getIntForUser(resolver,
-                Settings.Secure.STATUS_BAR_BATTERY_STYLE, 4, UserHandle.USER_CURRENT);
+                Settings.Secure.STATUS_BAR_BATTERY_STYLE, 0, UserHandle.USER_CURRENT);
         mStatusBarBattery.setValue(Integer.toString(batteryStyle));
         mStatusBarBattery.setOnPreferenceChangeListener(this);
 
@@ -82,9 +82,6 @@ public class BatteryOptions extends SettingsPreferenceFragment implements
             Settings.System.putIntForUser(getContentResolver(),
                     Settings.System.SHOW_BATTERY_PERCENT, batteryShowPercent,
                     UserHandle.USER_CURRENT);
-            int index = mStatusBarBatteryShowPercent.findIndexOfValue((String) newValue);
-            mStatusBarBatteryShowPercent.setSummary(
-                    mStatusBarBatteryShowPercent.getEntries()[index]);
             boolean hideForcePercentage = batteryShowPercent == 5
             || batteryShowPercent == 6; /*text or hidden style*/
             mStatusBarBatteryShowPercent.setEnabled(!hideForcePercentage);
@@ -94,9 +91,6 @@ public class BatteryOptions extends SettingsPreferenceFragment implements
             Settings.Secure.putIntForUser(getContentResolver(),
                     Settings.Secure.STATUS_BAR_BATTERY_STYLE, batteryStyle,
                     UserHandle.USER_CURRENT);
-            int index = mStatusBarBattery.findIndexOfValue((String) newValue);
-            mStatusBarBattery.setSummary(
-                    mStatusBarBattery.getEntries()[index]);
             boolean hideForcePercentage = batteryStyle == 5
             || batteryStyle == 6; /*text or hidden style*/
             mStatusBarBatteryShowPercent.setEnabled(!hideForcePercentage);
