@@ -171,4 +171,7 @@
     <string name="swap_volume_buttons_title">Key swapper</string>
     <string name="swap_volume_buttons_summary">Swap volume key controls when in landscape view</string>
 
+    <!-- Configurable lockscreen media blur strength -->
+    <string name="lockscreen_media_blur_title">Lockscreen media art blur level</string>
+
 </resources>
